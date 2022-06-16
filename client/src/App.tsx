@@ -1,7 +1,11 @@
+import AddCommentForm from "./components/AddCommentForm";
+import Comments from "./components/Comments";
+
 function App() {
   return (
-    <div className="App">
-     <h1>Welcome</h1>
+    <div>
+      <Comments />
+      <AddCommentForm />
     </div>
   );
 }
