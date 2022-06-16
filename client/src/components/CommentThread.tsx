@@ -3,9 +3,14 @@ import Comment from "./Comment";
 
 type Props = {
   comment: CommentType;
+  onMoreReplies: (value: string) => void;
 };
 
-const CommentThread = ({ comment }: Props) => {
+const CommentThread = ({ comment, onMoreReplies }: Props) => {
+  const handleMoreReplies = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    onMoreReplies(comment.id);
+  };
   return (
     <div className="parent-comment">
       <Comment key={comment.id} {...comment} />
@@ -13,9 +18,11 @@ const CommentThread = ({ comment }: Props) => {
         {comment.replies.map((reply) => {
           return <Comment key={reply.id} {...reply} />;
         })}
-        <a href="/#" className="show_more">
-          Show More Replies (2)
-        </a>
+        {comment.replies_count === comment.replies.length ? null : (
+          <a href="/#" className="show_more" onClick={handleMoreReplies}>
+            Show More Replies (2)
+          </a>
+        )}
       </div>
     </div>
   );
